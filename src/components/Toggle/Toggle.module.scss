@@ -9,6 +9,12 @@
 	-moz-user-select: none; // чтобы пользователь не мог взять и сделать drag'n'drop тогглера
 	-ms-user-select: none;
 	text-align: left;
+	&:hover {
+		opacity: 0.7;
+	}
+	&:active {
+		opacity: 0.5;
+	}
 }
 
 // описываем внешний вид зависящих от состояния чекбокса элементов:
@@ -23,6 +29,9 @@
 		.toggleSwitchToggle {
 			left: 36px;
 		}
+	}
+	&:focus + .toggleSwitchLabel {
+		outline: 2px solid blue;
 	}
 }
 

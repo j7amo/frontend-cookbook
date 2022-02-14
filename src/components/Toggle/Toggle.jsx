@@ -54,6 +54,7 @@ const Toggle = ({ name, onChangeHandler }) => {
 			<label
 				className={styles.toggleSwitchLabel}
 				htmlFor={name}
+				tabIndex="0"
 			>
 				{/*здесь начинается самое интересное:*/}
 				{/*у нас есть <span>, который будет скруглённым контейнером для самого шарика-тогглера*/}
