@@ -1,0 +1,13 @@
+.accordionItem {
+	&IsOpen {
+      height: 100px;
+	}
+	&IsClosed {
+      height: 0;
+	}
+}
+
+.answer {
+	overflow: hidden;
+	color: black;
+}
