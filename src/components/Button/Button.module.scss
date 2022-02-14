@@ -1,11 +1,20 @@
 /* Здесь мы используем CSS-модули, которые позволяют нам создавать дополнительные пространства имён,
 что в свою очередь облегчает задачу придумывания селекторов.*/
 .mySexyButton {
-	background-color: black;
+	background-color: yellowgreen;
 	color: white;
 	font-size: 20px;
 	padding: 10px 60px;
 	border-radius: 5px;
 	margin: 10px 0;
 	cursor: pointer;
+	&:hover {
+		opacity: 0.7;
+	}
+	&:focus {
+		// описываем :focus только если у нас должна быть особая стилизация вместо системной
+	}
+	&:active {
+		opacity: 0.5;
+	}
 }
