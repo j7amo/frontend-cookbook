@@ -1,0 +1,98 @@
+// опишем внешний вид и поведение общего контейнера:
+.toggleSwitch {
+	position: relative; // задаём относительное позиционирование, чтобы потом абсолютно спозиционировать сам тогглер
+	width: 75px;
+	display: inline-block; // делаем элемент строчно-блочным, чтобы он был контейнером и не было проблем с окружающей разметкой
+	// но с display: inline-block нужно быть осторожным, на него влияет размер шрифта!!!
+	vertical-align: middle; // для inline-block элемента мы можем использовать свойство vertical-align для выравнивания контента
+	-webkit-user-select: none; // эти 3 свойства запрещают делать тогглер selectable, что нужно для того,
+	-moz-user-select: none; // чтобы пользователь не мог взять и сделать drag'n'drop тогглера
+	-ms-user-select: none;
+	text-align: left;
+}
+
+// описываем внешний вид зависящих от состояния чекбокса элементов:
+.toggleSwitchCheckbox {
+	// поиск элементом-потомков производим в label'е
+	&:checked + .toggleSwitchLabel {
+		// смещение контейнера с надписями и фонами
+		.toggleSwitchInnerContainer {
+			margin-left: 0;
+		}
+		// смещение шарика-тогглера
+		.toggleSwitchToggle {
+			left: 36px;
+		}
+	}
+}
+
+// опишем внешний вид label'а:
+.toggleSwitchLabel {
+	display: block; // делаем label блочным контейнером, чтобы он занял всю ширину toggleSwitch-контейнера
+	overflow: hidden; // то, что не помещается, будет обрезано / скрыто
+	cursor: pointer; // облегчаем работу с интерактивными элементами - курсор будет меняться на указатель в форме руки
+	border-radius: 20px; // скругляем рамку для красоты
+}
+
+// опишем внешний вид контейнера для псевдо-элементов, которые позволят изобразить надписи ВКЛ / ВЫКЛ с фонами:
+.toggleSwitchInnerContainer {
+	display: flex; // делаем контейнер флексом, чтобы он нормально воспринимал размеры и правильно распределил свои элементы
+	width: 200%; // делаем контейнер в 2 раза шире (он будет перемещаться и отображать ВКЛ / ВЫКЛ)
+	margin-left: -100%; // задаём смещение контейнера влево, чтобы показать ВЫКЛ
+	transition: margin 0.3s ease-in 0s; // делаем плавное изменение margin для перемещения контейнера
+	&::before,
+	&::after {
+		width: 50%; // задаём флекс-элементам ширину 50% от toggleSwitchInnerContainer, чтобы они заняли по 50%
+		line-height: 40px;
+		font-size: 14px;
+		color: white;
+		font-weight: bold;
+		box-sizing: border-box;
+	}
+	&::before {
+		// описываем самый первый элемент-потомок - псевдо-элемент ::before
+		content: 'ON'; // это будет текст с фоном
+		text-transform: uppercase;
+		padding-left: 10px; // чтобы текст не "прилипал"
+		background-color: cornflowerblue;
+		color: #fff;
+	}
+	&::after {
+		// также описываем самый последний элемент-потомок - псевдо-элемент ::after
+		content: 'OFF'; // это также будет текст с фоном
+		text-transform: uppercase;
+		padding-right: 10px; // чтобы текст не "прилипал"
+		background-color: indianred;
+		color: #fff;
+		text-align: right; // не забываем, что у нас изначально text-align: left и для этого элемента меняем
+	}
+}
+
+// описываем сам шарик-тогглер:
+.toggleSwitchToggle {
+	display: block; // делаем блочным, чтобы элемент смог нормально воспринимать размеры
+	width: 30px; // делаем сначала квадрат
+	height: 30px;
+	margin: 5px; // дополнительно смещаем шарик, даём ему воздух относительно контейнера
+	background: white;
+	position: absolute; // делаем абсолютно позиционированным
+	top: 0; // делаем смещение левого верхнего угла тогглера относительно верхнего левого угла контейнера
+	left: 0;
+	border-radius: 20px; // собственно получаем шарик! =)
+	transition: all 0.3s ease-in 0s; // делаем плавное изменение всех свойств, но по сути только свойства left.
+}
+
+// описываем стили для доступного сокрытия чекбокса
+.visuallyHidden {
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	margin: -1px;
+	padding: 0;
+	overflow: hidden;
+	white-space: nowrap;
+	border: 0;
+	clip: rect(0 0 0 0);
+	-webkit-clip-path: inset(100%);
+	clip-path: inset(100%);
+}

@@ -15,7 +15,7 @@ function App() {
 			<header className="App-header">
 				<Button type="button">Don't click me!</Button>
 				{/*<SomeSexyButton>Click me!</SomeSexyButton>*/}
-				<Toggle />
+				<Toggle name="superToggle" onChangeHandler={(value) => console.log(value)}/>
 			</header>
 		</div>
 	);
