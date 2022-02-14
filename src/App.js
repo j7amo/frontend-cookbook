@@ -7,6 +7,7 @@ import { Button } from "./components/Button/Button";
 // Если мы импортируем что-то, что было экспортировано по умолчанию (default export), то мы можем использовать
 // любое наименование при импорте!
 // import SomeSexyButton from "./components/Button/Button";
+import Toggle from "./components/Toggle/Toggle";
 
 function App() {
 	return (
@@ -14,6 +15,7 @@ function App() {
 			<header className="App-header">
 				<Button type="button">Don't click me!</Button>
 				{/*<SomeSexyButton>Click me!</SomeSexyButton>*/}
+				<Toggle />
 			</header>
 		</div>
 	);
