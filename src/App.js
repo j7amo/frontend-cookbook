@@ -9,6 +9,7 @@ import { Button } from './components/Button/Button';
 // import SomeSexyButton from "./components/Button/Button";
 import Toggle from './components/Toggle/Toggle';
 import Accordion from './components/Accordion/Accordion';
+import Tabs from "./components/Tabs/Tabs";
 
 function App() {
 	return (
@@ -18,6 +19,7 @@ function App() {
 					Don't click me!
 				</Button>
 				{/*<SomeSexyButton>Click me!</SomeSexyButton>*/}
+				<Tabs />
 				<Toggle
 					name="superToggle"
 					onChangeHandler={(value) =>
