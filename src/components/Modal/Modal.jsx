@@ -34,9 +34,38 @@ const Modal = ({ closeModal, title, children }) => {
 		};
 	}, []);
 
+	// заранее подготовим коллбэк на обработку события нажатия Esc / Escape и сохраним ссылку на него, чтобы
+	// можно было его потом "отписать"
+	const onEscKeydown = (evt) => {
+		console.log(evt);
+		if (evt.key === 'Escape') {
+			closeModal();
+		}
+	};
+	// используем ещё один useEffect для того, чтобы навесить обработчик события нажатия кнопки Esc / Escape
+	useEffect(() => {
+		// "навешивание" происходит прямо на глобальный объект window
+		window.addEventListener('keydown', onEscKeydown);
+		return () => {
+			window.removeEventListener(
+				'keydown',
+				onEscKeydown,
+			);
+		};
+	}, []);
+
 	return (
-		<div className={styles.modalOverlay}>
-			<div className={styles.modalContainer}>
+		<div
+			className={styles.modalOverlay}
+			onClick={closeModal}
+		>
+			{/*по умолчанию события ловятся в фазе всплытия, а это значит, что любой клик по любому потомку оверлея всплывёт до оверлея, а нам*/}
+			{/*нужно эти клики обрабатывать по-разному! Поэтому используем хитрость - evt.stopPropagation - запрещаем всплытие на дочерних элементах*/}
+			<div
+				className={styles.modalContainer}
+				// вот здесь мы останавливаем всплытие
+				onClick={(evt) => evt.stopPropagation()}
+			>
 				<div className={styles.modalHeader}>
 					<h3 className={styles.modalTitle}>
 						{title}
