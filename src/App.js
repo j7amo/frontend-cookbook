@@ -1,4 +1,5 @@
 import './App.css';
+import { useCallback, useState } from 'react';
 // именованный импорт (если соответствующий экспорт также был именованный) обязывает нас (1)использовать
 // фигурные скобки + явным образом (2)писать идентификатор компонента, который мы импортируем
 import { Button } from './components/Button/Button';
@@ -10,6 +11,7 @@ import { Button } from './components/Button/Button';
 import Toggle from './components/Toggle/Toggle';
 import Accordion from './components/Accordion/Accordion';
 import Tabs from './components/Tabs/Tabs';
+import Modal from './components/Modal/Modal';
 
 const tabsData = [
 	{
@@ -35,6 +37,14 @@ const tabsData = [
 ];
 
 function App() {
+	// стейт для модалки
+	const [isModalOpen, setIsModalOpen] = useState(false);
+	// коллбэк для закрытия модалки, обёрнутый в useCallback, так как мы спускаем его в дочерний компонент
+	const closeModal = useCallback(
+		() => setIsModalOpen(false),
+		[],
+	);
+
 	return (
 		<div className="App">
 			<header className="App-header">
@@ -49,6 +59,28 @@ function App() {
 						console.log(value)
 					}
 				/>
+				<button
+					type="button"
+					onClick={() => setIsModalOpen(true)}
+				>
+					Show modal
+				</button>
+				{/*рисуем модалку только, при флаге = true*/}
+				{isModalOpen && (
+					<Modal
+						// динамически прокидываем текст, чтобы было много разных модалок
+						title="One sexy modal"
+						// прокидываем коллбэк на закрытие модалки, который будет вызван при любом
+						// действии в дочернем компоненте, направленном на закрытие модалки
+						// здесь же в родительском компоненте он выставит флаг isModalOpen в FALSE
+						closeModal={closeModal}
+					>
+						<p>
+							You are seeing a supercool modal
+							content!
+						</p>
+					</Modal>
+				)}
 				<Accordion />
 			</header>
 		</div>
