@@ -1,0 +1,16 @@
+.tabsContainer {
+	width: 100%; // занимаем всю доступную ширину
+}
+
+.tabsList {
+	display: flex; // делаем список флекс-контейнером, что позволит легко равномерно распределить его потомков
+	list-style: none; // сбрасываем всё дефолтное уродство
+	padding: 0;
+	margin: 0;
+}
+
+.tabContent {
+	min-height: 100px; // зададим минимальную высоту контента, чтобы при переключении вкладок он не "прыгал"
+	padding: 30px;
+	background-color: lightgoldenrodyellow;
+}

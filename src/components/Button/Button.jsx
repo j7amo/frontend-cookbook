@@ -112,7 +112,13 @@ const Button = (props) => {
 // если мы хотим быть красавчиками, то нужно обязательно описать типы пропов с помощью PropTypes
 Button.propTypes = {
 	className: PropTypes.string,
-	color: PropTypes.oneOf(['primary', 'secondary', 'accent', 'light-primary', 'light-secondary']),
+	color: PropTypes.oneOf([
+		'primary',
+		'secondary',
+		'accent',
+		'light-primary',
+		'light-secondary',
+	]),
 	size: PropTypes.oneOf(['sm', 'md', 'lg']),
 	type: PropTypes.string,
 	onClick: PropTypes.func,
