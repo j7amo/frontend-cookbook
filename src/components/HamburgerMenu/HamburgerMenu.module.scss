@@ -1,61 +1,137 @@
-.mainNavigation {
-
+// опишем примесь для снижения количества дублируемого кода
+@mixin menuBar {
+	position: absolute; // абсолютное позиционирование для удобного управления расположением
+	content: '';
+	width: 30px; // размеры перекладин меню
+	height: 2px;
+	left: 0; // позиционируем
+	background-color: black;
+	transition: transform 0.3s; // задаём плавное изменение значений свойства transform
 }
 
-.mainNavigationItems {
+// опишем примесь эффектов состояний
+@mixin interactiveStates {
+	&:hover {
+		opacity: 0.7;
+	}
+	&:active {
+		opacity: 0.5;
+	}
+}
 
+// стилизуем меню в целом
+.mainNavigation {
+	position: fixed; // закрепляем навигацию
+	top: 0;
+	left: 0;
+	width: 0;
+	display: flex; // выравниваем кнопку-гамбургер с основным меню
+	flex-direction: column;
+	align-items: flex-start;
+	&Open {
+		width: 100%;
+		height: 100%;
+		z-index: 98;
+		background-color: rgba(0, 0, 0, 0.5); // полупрозрачный фон
+	}
+}
+
+// "вырываем" с помощью контейнера кнопку из потока
+.menuButtonContainer {
+	position: absolute;
+	z-index: 100;
+	top: 0;
+	left: 0;
+	padding: 20px 30px;
+}
+
+// стилизуем само меню
+.mainNavigationItems {
+	list-style: none; // сбрасываем стили по умолчанию для списков
+	padding: 100px 0 0;
+	margin: 0;
+	width: 30vw;
+	height: 100vh;
+	background-color: aquamarine;
+	// плавно меняем свойства (меню как бы выезжает)
+	transform: translateX(-100px);
+	opacity: 0;
+	transition: all 0.3s;
+	&Open {
+		transform: translateX(0);
+		opacity: 1;
+		transition: all 0.3s;
+		z-index: 99;
+	}
 }
 
 .mainNavigationItem {
-
+	margin-bottom: 20px;
+	padding-left: 100px;
+	text-align: left;
+	&:last-child {
+		margin-bottom: 20px;
+	}
 }
 
 .mainNavigationItemLink {
-
+	@include interactiveStates;
+	text-decoration: none;
+	color: black;
+	font-size: 20px;
+	font-weight: bold;
+	cursor: pointer;
 }
 
 // опишем внешний вид кнопки меню
 .hamburgerMenuButton {
-  position: relative; // задаём относительное позиционирование, чтобы потом разместить псевдоэлементы
-  width: 30px;
-  height: 21px;
-  background-color: white;
-  border: none; // убираем рамки у кнопки
-  cursor: pointer; // облегчаем взаимодействие с интерактивным элементом
-  padding: 0;
-  // общие для псевдоэлементов стили описываем в одном блоке
-  &::before, &::after {
-    position: absolute; // абсолютное позиционирование для удобного управления расположением
-    content: "";
-    width: 30px;
-    height: 2px;
-    left: 0;
-    background-color: black;
-  }
-  &::before {
-    top: 0;
-  }
-  &::after {
-    bottom: 0;
-  }
-  // стили состояний интерактивного элемента
-  &:hover {
-    opacity: 0.7;
-  }
-  &:active {
-    opacity: 0.5;
-  }
+	position: relative; // задаём относительное позиционирование, чтобы потом разместить псевдоэлементы
+	width: 30px;
+	height: 26px;
+	background: none;
+	border: none; // убираем рамки у кнопки
+	cursor: pointer; // облегчаем взаимодействие с интерактивным элементом
+	padding: 0;
+	margin-bottom: 30px;
+	z-index: 100;
+	&::before {
+		@include menuBar;
+		top: 0;
+	}
+	&::after {
+		@include menuBar;
+		bottom: 0;
+	}
+	// стили состояний интерактивного элемента
+	@include interactiveStates;
+	// отдельно описываем поведение перекладин при открытом меню (хотим видеть крестик)
+	&Opened {
+		&::before {
+			@include menuBar;
+			transform: translateY(12px) rotate(45deg);
+		}
+		&::after {
+			@include menuBar;
+			transform: translateY(-12px) rotate(135deg);
+		}
+		.middleMenuBar {
+			position: relative;
+			&::before {
+				@include menuBar;
+				left: -15px;
+				opacity: 0;
+				transform: translateX(-20px);
+				transition: all 0.3s;
+			}
+		}
+	}
 }
 
 // отдельно описываем стили <span>, который нужен для средней перекладины меню
 .middleMenuBar {
-  position: relative;
-  &::before {
-    position: absolute;
-    content: "";
-    width: 30px;
-    height: 2px;
-    left: -15px;
-    background-color: black;
-  }
+	position: relative;
+	&::before {
+		@include menuBar;
+		left: -15px;
+	}
 }
