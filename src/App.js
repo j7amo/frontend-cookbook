@@ -12,6 +12,7 @@ import Toggle from './components/Toggle/Toggle';
 import Accordion from './components/Accordion/Accordion';
 import Tabs from './components/Tabs/Tabs';
 import Modal from './components/Modal/Modal';
+import HamburgerMenu from './components/HamburgerMenu/HamburgerMenu';
 
 const tabsData = [
 	{
@@ -36,7 +37,21 @@ const tabsData = [
 	},
 ];
 
+const hamburgerMenuData = [
+	{
+		label: 'Yandex',
+		href: 'https://yandex.ru',
+	},
+	{
+		label: 'Google',
+		href: 'https://www.google.com',
+	},
+];
+
 function App() {
+	// стейт для меню-гамбургера
+	const [isHamburgerMenuOpen, setIsHamburgerMenuOpen] =
+		useState(false);
 	// стейт для модалки
 	const [isModalOpen, setIsModalOpen] = useState(false);
 	// коллбэк для закрытия модалки, обёрнутый в useCallback, так как мы спускаем его в дочерний компонент
@@ -44,10 +59,19 @@ function App() {
 		() => setIsModalOpen(false),
 		[],
 	);
+	// коллбэк для скрытия / показа гамбургер-меню
+	const toggleHamburgerMenu = useCallback(() => {
+		setIsHamburgerMenuOpen((prevIsOpen) => !prevIsOpen);
+	}, []);
 
 	return (
 		<div className="App">
 			<header className="App-header">
+				<HamburgerMenu
+					isMenuOpen={isHamburgerMenuOpen}
+					navItems={hamburgerMenuData}
+					toggleMenu={toggleHamburgerMenu}
+				/>
 				<Button type="button">
 					Don't click me!
 				</Button>
