@@ -20,10 +20,7 @@ const Tab = ({ label, isActive, index, onClick }) => {
 		<li className={styles.tabContainer}>
 			<button
 				// используем classnames для динамического формирования списка стилей
-				className={classnames(
-					styles.tab,
-					isActive && styles.tabIsActive,
-				)}
+				className={classnames(styles.tab, isActive && styles.tabIsActive)}
 				type="button"
 				onClick={onClick}
 				// ВАЖНО: свойства с префиксом data- ВСЕГДА СТРОКИ!!!

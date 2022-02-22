@@ -6,30 +6,15 @@ import styles from './AccordionItem.module.scss';
 const AccordionItem = ({ question, answer }) => {
 	const [isOpen, setIsOpen] = useState(false);
 
-	const handleClick = () =>
-		setIsOpen((prevIsOpen) => !prevIsOpen);
+	const handleClick = () => setIsOpen((prevIsOpen) => !prevIsOpen);
 
 	return (
 		<li>
-			<button
-				className={styles.accordionItemButton}
-				onClick={handleClick}
-			>
+			<button className={styles.accordionItemButton} onClick={handleClick}>
 				{question}
-				<span
-					className={styles.openClosedIndicator}
-				>
-					{isOpen ? '-' : '+'}
-				</span>
+				<span className={styles.openClosedIndicator}>{isOpen ? '-' : '+'}</span>
 			</button>
-			<div
-				className={classnames(
-					styles.answer,
-					!isOpen && styles.answerIsClosed,
-				)}
-			>
-				{answer}
-			</div>
+			<div className={classnames(styles.answer, !isOpen && styles.answerIsClosed)}>{answer}</div>
 		</li>
 	);
 };

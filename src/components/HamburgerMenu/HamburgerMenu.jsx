@@ -9,11 +9,7 @@ import styles from './HamburgerMenu.module.scss';
 // - isMenuOpen - показываем ли меню
 // - navItems - структуру данных, в которой будут лейблы для ссылок (элементов меню) и сами ссылки
 // - toggleMenu - коллбэк, который меняет состояние родительского компонента
-const HamburgerMenu = ({
-	isMenuOpen,
-	navItems,
-	toggleMenu,
-}) => {
+const HamburgerMenu = ({ isMenuOpen, navItems, toggleMenu }) => {
 	const closeMenu = () => {
 		if (isMenuOpen) {
 			toggleMenu();
@@ -42,51 +38,26 @@ const HamburgerMenu = ({
 	}, [isMenuOpen]);
 
 	return (
-		<nav
-			className={classnames(
-				styles.mainNavigation,
-				isMenuOpen && styles.mainNavigationOpen,
-			)}
-			onClick={closeMenu}
-		>
+		<nav className={classnames(styles.mainNavigation, isMenuOpen && styles.mainNavigationOpen)} onClick={closeMenu}>
 			{/*дополнительный контейнер, который будет абсолютно позиционирован*/}
 			<div className={styles.menuButtonContainer}>
 				<button
 					type="button"
-					className={classnames(
-						styles.hamburgerMenuButton,
-						isMenuOpen &&
-							styles.hamburgerMenuButtonOpened,
-					)}
+					className={classnames(styles.hamburgerMenuButton, isMenuOpen && styles.hamburgerMenuButtonOpened)}
 					onClick={toggleHamburgerMenu}
 				>
-					<span
-						className={styles.middleMenuBar}
-					/>
+					<span className={styles.middleMenuBar} />
 				</button>
 			</div>
 			<ul
-				className={classnames(
-					styles.mainNavigationItems,
-					isMenuOpen &&
-						styles.mainNavigationItemsOpen,
-				)}
+				className={classnames(styles.mainNavigationItems, isMenuOpen && styles.mainNavigationItemsOpen)}
 				// прерываем всплытие события с меню
 				onClick={(evt) => evt.stopPropagation()}
 			>
 				{navItems.map(({ label, href }) => {
 					return (
-						<li
-							className={
-								styles.mainNavigationItem
-							}
-						>
-							<a
-								href={href}
-								className={
-									styles.mainNavigationItemLink
-								}
-							>
+						<li className={styles.mainNavigationItem}>
+							<a href={href} className={styles.mainNavigationItemLink}>
 								{label}
 							</a>
 						</li>

@@ -27,18 +27,7 @@ import styles from './Button.module.scss';
 // своего JSX (UI).
 const Button = (props) => {
 	// В объекте props можно передавать в принципе всё, что угодно:
-	const {
-		color,
-		size,
-		className,
-		children,
-		type,
-		onClick,
-		disabled,
-		style,
-		name,
-		containerName,
-	} = props;
+	const { color, size, className, children, type, onClick, disabled, style, name, containerName } = props;
 	// где, например:
 	// - color, size, className, style - свойства, которые позволяют нам определить стили для компонента;
 	// - children - свойство, которое позволяет отрисовать то, что в нём передано;
@@ -51,11 +40,7 @@ const Button = (props) => {
 	// атрибуту найти элемент.
 	//
 	// с помощью библиотеки classname мы можем сформировать итоговые стили элемента
-	const buttonClass = classnames(
-		styles[`wrapper-${color}`],
-		styles[`wrapper-${size}`],
-		className,
-	);
+	const buttonClass = classnames(styles[`wrapper-${color}`], styles[`wrapper-${size}`], className);
 	//
 	// По-хорошему коллбэки нужно объявлять до return и в идеале использовать хук useCallback, который
 	// позволяет вернуть ОДНУ И ТУ ЖЕ ССЫЛКУ, если указанные зависимости НЕ ПОМЕНЯЛИСЬ, что позволяет
@@ -112,13 +97,7 @@ const Button = (props) => {
 // если мы хотим быть красавчиками, то нужно обязательно описать типы пропов с помощью PropTypes
 Button.propTypes = {
 	className: PropTypes.string,
-	color: PropTypes.oneOf([
-		'primary',
-		'secondary',
-		'accent',
-		'light-primary',
-		'light-secondary',
-	]),
+	color: PropTypes.oneOf(['primary', 'secondary', 'accent', 'light-primary', 'light-secondary']),
 	size: PropTypes.oneOf(['sm', 'md', 'lg']),
 	type: PropTypes.string,
 	onClick: PropTypes.func,

@@ -20,9 +20,7 @@ const Toggle = ({ name, onChangeHandler }) => {
 	const [isToggleOn, setIsToggleOn] = useState(false);
 
 	// 2) обеспечиваем способ изменения этого самого состояния с помощью коллбэка
-	const handleToggleChange = ({
-		target: { checked },
-	}) => {
+	const handleToggleChange = ({ target: { checked } }) => {
 		setIsToggleOn(checked);
 		// и не забываем вызвать "родительский" коллбэк с актуальными данными:
 		onChangeHandler(checked);
@@ -38,10 +36,7 @@ const Toggle = ({ name, onChangeHandler }) => {
 		<div className={styles.toggleSwitch}>
 			{/*сам инпут с правильным типом, обязательными атрибутами NAME и ID*/}
 			<input
-				className={classnames(
-					styles.toggleSwitchCheckbox,
-					styles.visuallyHidden,
-				)}
+				className={classnames(styles.toggleSwitchCheckbox, styles.visuallyHidden)}
 				type="checkbox"
 				// важный момент: если мы хардкодим name, id и htmlFor атрибуты, то наш код
 				// становится плохо расширяемым и негибким, поэтому мы будем спускать эти данные сверху
@@ -51,23 +46,13 @@ const Toggle = ({ name, onChangeHandler }) => {
 				onChange={handleToggleChange}
 			/>
 			{/*проассоциированный с ним с помощью атрибута htmlFor элемент <label>*/}
-			<label
-				className={styles.toggleSwitchLabel}
-				htmlFor={name}
-				tabIndex="0"
-			>
+			<label className={styles.toggleSwitchLabel} htmlFor={name} tabIndex="0">
 				{/*здесь начинается самое интересное:*/}
 				{/*у нас есть <span>, который будет скруглённым контейнером для самого шарика-тогглера*/}
 				{/*интересный момент: в Реакте любой элемент может быть самозакрывающимся! например, span ниже*/}
-				<span
-					className={
-						styles.toggleSwitchInnerContainer
-					}
-				/>
+				<span className={styles.toggleSwitchInnerContainer} />
 				{/*и 2-ой <span>, который будет самим шариком-тогглером*/}
-				<span
-					className={styles.toggleSwitchToggle}
-				/>
+				<span className={styles.toggleSwitchToggle} />
 			</label>
 		</div>
 	);

@@ -19,9 +19,7 @@ const Tabs = ({ data }) => {
 	const handleTabClick = useCallback(
 		(evt) =>
 			// Явным образом приводим к числу, так как всё, что достаётся из dataset'а - String
-			setActiveTabIndex(
-				Number(evt.target.dataset.index),
-			),
+			setActiveTabIndex(Number(evt.target.dataset.index)),
 		[],
 	);
 	return (

@@ -47,18 +47,12 @@ const Modal = ({ closeModal, title, children }) => {
 		// "навешивание" происходит прямо на глобальный объект window
 		window.addEventListener('keydown', onEscKeydown);
 		return () => {
-			window.removeEventListener(
-				'keydown',
-				onEscKeydown,
-			);
+			window.removeEventListener('keydown', onEscKeydown);
 		};
 	}, []);
 
 	return (
-		<div
-			className={styles.modalOverlay}
-			onClick={closeModal}
-		>
+		<div className={styles.modalOverlay} onClick={closeModal}>
 			{/*по умолчанию события ловятся в фазе всплытия, а это значит, что любой клик по любому потомку оверлея всплывёт до оверлея, а нам*/}
 			{/*нужно эти клики обрабатывать по-разному! Поэтому используем хитрость - evt.stopPropagation - запрещаем всплытие на дочерних элементах*/}
 			<div
@@ -67,27 +61,14 @@ const Modal = ({ closeModal, title, children }) => {
 				onClick={(evt) => evt.stopPropagation()}
 			>
 				<div className={styles.modalHeader}>
-					<h3 className={styles.modalTitle}>
-						{title}
-					</h3>
-					<button
-						className={
-							styles.crossShapedCloseButton
-						}
-						onClick={closeModal}
-					>
+					<h3 className={styles.modalTitle}>{title}</h3>
+					<button className={styles.crossShapedCloseButton} onClick={closeModal}>
 						X
 					</button>
 				</div>
-				<div className={styles.modalContent}>
-					{children}
-				</div>
+				<div className={styles.modalContent}>{children}</div>
 				<div className={styles.modalFooter}>
-					<button
-						type="button"
-						className={styles.closeButton}
-						onClick={closeModal}
-					>
+					<button type="button" className={styles.closeButton} onClick={closeModal}>
 						Close
 					</button>
 				</div>

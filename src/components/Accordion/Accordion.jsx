@@ -44,19 +44,17 @@ const Accordion = () => {
 	return (
 		<ul className={styles.accordion}>
 			{/*"нарезаем" данные из массива:*/}
-			{someVerySexyAccordionData.map(
-				({ question, answer }, index) => {
-					return (
-						<AccordionItem
-							// передаём пропы
-							question={question}
-							answer={answer}
-							// не забываем передавать проп KEY (это нужно для эффективного обновления DOM'а Реактом)
-							key={question + index}
-						/>
-					);
-				},
-			)}
+			{someVerySexyAccordionData.map(({ question, answer }, index) => {
+				return (
+					<AccordionItem
+						// передаём пропы
+						question={question}
+						answer={answer}
+						// не забываем передавать проп KEY (это нужно для эффективного обновления DOM'а Реактом)
+						key={question + index}
+					/>
+				);
+			})}
 		</ul>
 	);
 };
