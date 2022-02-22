@@ -1,0 +1,39 @@
+.breadCrumbs {
+	display: flex;
+	flex-wrap: wrap;
+	list-style: none;
+	margin: 0 auto;
+	width: 500px;
+}
+
+.breadCrumb {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	position: relative;
+	margin-right: 30px;
+	padding: 10px;
+	&:last-child {
+		.breadCrumbLink {
+			background-color: yellowgreen;
+			text-decoration: none;
+		}
+	}
+	&:not(:last-child) {
+		&::after {
+			// используем трюк с границами разного цвета, чтобы сделать стрелку в форме треугольника
+			position: absolute;
+			content: '';
+			right: -35px;
+			width: 1px;
+			height: 1px;
+			border: 7px solid transparent;
+			border-left: 13px solid darkgreen;
+		}
+	}
+}
+
+.breadCrumbLink {
+	color: black;
+	text-transform: uppercase;
+}

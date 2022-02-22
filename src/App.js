@@ -18,6 +18,7 @@ import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import Pizza from './components/Breadcrumbs/Pizza/Pizza';
 import EditPizza from './components/Breadcrumbs/EditPizza/EditPizza';
 import Toppings from './components/Breadcrumbs/Toppings/Toppings';
+import Breadcrumbs from './components/Breadcrumbs/Breadcrumbs';
 
 const tabsData = [
 	{
@@ -99,7 +100,14 @@ function App() {
 						<Route
 							path={path}
 							// новшество в React Router v6: element вместо component
-							element={component}
+							element={
+								<>
+									{/*не забываем пробросить PATH также в <Breadcrumbs>*/}
+									{/*это нужно, чтобы найти все "подпути", которые входят в текущий*/}
+									<Breadcrumbs routes={routesDataForBreadcrumbs} path={path} />
+									{component}
+								</>
+							}
 							key={`${path}-${index}`}
 						/>
 					))}
