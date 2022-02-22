@@ -1,5 +1,5 @@
 import React from 'react';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from "react-router-dom";
 
 const toppings = [
 	{ id: '1', name: 'Cheese' },
@@ -32,7 +32,11 @@ const Toppings = () => {
 				{pizza
 					.find(({ id }) => id === pizzaId)
 					.toppings.map(({ id, name }) => (
-						<li key={id}>{name}</li>
+						<li key={id}>
+							<Link to={`${id}`}>
+								{name}
+							</Link>
+						</li>
 					))}
 			</ul>
 		</div>

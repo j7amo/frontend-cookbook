@@ -19,6 +19,7 @@ import Pizza from './components/Breadcrumbs/Pizza/Pizza';
 import EditPizza from './components/Breadcrumbs/EditPizza/EditPizza';
 import Toppings from './components/Breadcrumbs/Toppings/Toppings';
 import Breadcrumbs from './components/Breadcrumbs/Breadcrumbs';
+import Topping from "./components/Breadcrumbs/Topping/Topping";
 
 const tabsData = [
 	{
@@ -75,6 +76,11 @@ const routesDataForBreadcrumbs = [
 		path: '/pizza/:pizzaId/toppings',
 		name: 'Pizza Toppings',
 		component: <Toppings />,
+	},
+	{
+		path: '/pizza/:pizzaId/toppings/:toppingId',
+		name: 'Topping',
+		component: <Topping />,
 	},
 ];
 
