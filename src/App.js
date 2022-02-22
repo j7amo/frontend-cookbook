@@ -104,6 +104,7 @@ function App() {
 								<>
 									{/*не забываем пробросить PATH также в <Breadcrumbs>*/}
 									{/*это нужно, чтобы найти все "подпути", которые входят в текущий*/}
+									{/*БЕЗ ЭТОГО РАБОТАТЬ НЕ БУДЕТ!!!*/}
 									<Breadcrumbs routes={routesDataForBreadcrumbs} path={path} />
 									{component}
 								</>
