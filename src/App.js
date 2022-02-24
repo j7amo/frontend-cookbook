@@ -19,7 +19,8 @@ import Pizza from './components/Breadcrumbs/Pizza/Pizza';
 import EditPizza from './components/Breadcrumbs/EditPizza/EditPizza';
 import Toppings from './components/Breadcrumbs/Toppings/Toppings';
 import Breadcrumbs from './components/Breadcrumbs/Breadcrumbs';
-import Topping from "./components/Breadcrumbs/Topping/Topping";
+import Topping from './components/Breadcrumbs/Topping/Topping';
+import Form from './components/Form/Form';
 
 const tabsData = [
 	{
@@ -135,6 +136,7 @@ function App() {
 				<button type="button" onClick={() => setIsModalOpen(true)}>
 					Show modal
 				</button>
+				<Form />
 				{/*рисуем модалку только, при флаге = true*/}
 				{isModalOpen && (
 					<Modal
