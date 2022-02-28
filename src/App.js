@@ -21,6 +21,7 @@ import Toppings from './components/Breadcrumbs/Toppings/Toppings';
 import Breadcrumbs from './components/Breadcrumbs/Breadcrumbs';
 import Topping from './components/Breadcrumbs/Topping/Topping';
 import Form from './components/Form/Form';
+import Toast from './components/Toast/Toast';
 
 const tabsData = [
 	{
@@ -90,6 +91,12 @@ function App() {
 	const [isHamburgerMenuOpen, setIsHamburgerMenuOpen] = useState(false);
 	// стейт для модалки
 	const [isModalOpen, setIsModalOpen] = useState(false);
+	// стейт для тоста
+	const [isToastShown, setIsToastShown] = useState(true);
+	// коллбэк для закрытия тоста
+	const handleToastClose = useCallback(() => {
+		setIsToastShown(!isToastShown);
+	},[]);
 	// коллбэк для закрытия модалки, обёрнутый в useCallback, так как мы спускаем его в дочерний компонент
 	const closeModal = useCallback(() => setIsModalOpen(false), []);
 	// коллбэк для скрытия / показа гамбургер-меню
@@ -152,6 +159,14 @@ function App() {
 				)}
 				<Accordion />
 			</header>
+			<Toast
+				title="SUCCESS"
+				message="You've successfully received a notification TOAST! =)"
+				position="top-right"
+				dismissDelay="5000"
+				isToastToggledOn={isToastShown}
+				onToastClose={handleToastClose}
+			/>
 		</div>
 	);
 }
