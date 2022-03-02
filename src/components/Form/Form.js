@@ -2,6 +2,40 @@ import React, { useCallback, useState } from 'react';
 import { Button } from '../Button/Button';
 import RadioButton from '../RadioButton/RadioButton';
 import Checkbox from '../Checkbox/Checkbox';
+import Dropdown from '../Dropdown/Dropdown';
+import styles from './Form.module.scss';
+
+// подготовим данные для нарезки опций в дропдауне
+// нужно обратить внимание на структуру данных:
+// value и label очень похожи по своему значению, но это принципиально разные вещи!
+// value реально отправляется на сервер при сабмите формы,
+// а label это просто текстовое значение пункта выпадающего списка, которое нужно пользователю, чтобы понимать, что он выбирает!
+const dropdownOptions = [
+	{
+		value: 'pizza',
+		label: 'Pizza',
+	},
+	{
+		value: 'burger',
+		label: 'Burger',
+	},
+	{
+		value: 'curry',
+		label: 'Curry',
+	},
+	{
+		value: 'pad-thai',
+		label: 'Pad Thai',
+	},
+	{
+		value: 'tom-yum',
+		label: 'Tom Yum',
+	},
+	{
+		value: 'pelmeshki',
+		label: 'Pelmeshki',
+	},
+];
 
 //подготовим данные для "нарезки" радио-кнопок
 const radioData = [
@@ -46,6 +80,9 @@ const Form = () => {
 	// для этого будем использовать массив (размер будет равен размеру исходного массива с данными) с boolean-значениями
 	const [checkedState, setCheckedState] = useState(new Array(checkboxData.length).fill(false));
 
+	// храним и меняем состояние выпадающего списка
+	const [selectedDropdownValue, setSelectedDropdownValue] = useState('');
+
 	// реагируем на отправку формы
 	const handleFormSubmit = (evt) => {
 		// предотвращаем действие браузера по умолчанию (нам на самом деле сейчас не нужна отправка формы)
@@ -55,6 +92,8 @@ const Form = () => {
 		// сформируем и выведем выбранные значения для чекбоксов
 		const checkboxesChosen = checkboxData.filter((checkbox, index) => checkedState[index]).map(({ name }) => name);
 		console.log(`You've submitted LEARNING choice: ${checkboxesChosen}`);
+		// выводим выбранное в выпадающем списке значение
+		console.log(`Сегодня будем жрать ${selectedDropdownValue}`);
 	};
 
 	// реагируем на изменение значения текущей выбранной радио-кнопки
@@ -80,8 +119,13 @@ const Form = () => {
 		[checkedState],
 	);
 
+	// реагируем на изменение выбранного значения выпадающего списка
+	const handleDropdownSelectedValue = useCallback((evt) => {
+		setSelectedDropdownValue(evt.target.value);
+	}, []);
+
 	return (
-		<form onSubmit={handleFormSubmit}>
+		<form className={styles.superSexyForm} onSubmit={handleFormSubmit}>
 			{/*вместо того, чтобы "ловить" событие на каждой отдельной радио-кнопке будем делать это на общем контейнере*/}
 			<div onChange={handleRadioButtonsChange}>
 				What do you rate more?
@@ -96,6 +140,13 @@ const Form = () => {
 					<Checkbox label={label} name={name} checked={checkedState[index]} />
 				))}
 			</div>
+			{/*добавим компонент с выпадающим списком*/}
+			<Dropdown
+				label="Что будем жрать?"
+				options={dropdownOptions}
+				selectedValue={selectedDropdownValue}
+				onChangeHandler={handleDropdownSelectedValue}
+			/>
 			<Button type="submit">Send data!</Button>
 		</form>
 	);
