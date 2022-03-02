@@ -22,6 +22,7 @@ import Breadcrumbs from './components/Breadcrumbs/Breadcrumbs';
 import Topping from './components/Breadcrumbs/Topping/Topping';
 import Form from './components/Form/Form';
 import Toast from './components/Toast/Toast';
+import LoaderSpinner from "./components/LoaderSpinner/LoaderSpinner";
 
 const tabsData = [
 	{
@@ -130,6 +131,7 @@ function App() {
 					<Route path="/" element={<Link to="/pizza">To Pizza!</Link>} />
 				</Routes>
 			</Router>
+			<LoaderSpinner />
 			<header className="App-header">
 				<HamburgerMenu
 					isMenuOpen={isHamburgerMenuOpen}

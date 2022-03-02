@@ -77,7 +77,7 @@ const Button = (props) => {
 			{/*<button onClick={() => console.log('Button clicked!')}>*/}
 			{/*с помощью специального свойства объекта props "children" можно прокидывать любое содержимое*/}
 			{/*часто это просто текстовое содержимое*/}
-			{props.children}
+			{children}
 		</button>
 	);
 };
